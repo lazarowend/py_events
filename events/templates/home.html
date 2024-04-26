@@ -10,13 +10,15 @@
     <div class="container mt-5 pt-5">
         <div class="fixed-grid has-4-cols">
             <div class="grid">
+                {% if events %}
+                {% for event in events %}
                 <div class="cell">
 
 
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img src="{% static 'events/img/5ca38adb-8667-4848-9b86-d9d3eb8fcbf7.png' %}"
+                                <img src="{{ event.image.url }}" alt="{{ event.name }}""
                                     alt="Placeholder image" />
 
                             </figure>
@@ -24,83 +26,24 @@
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
-                                    <p class="title is-4">Casamento de Wiliam</p>
-                                    <p class="subtitle is-6">lazaro wend</p>
+                                    <p class="title is-4">{{ event.name }}</p>
+                                    <p class="subtitle is-6">Organizado por: {{ event.user.username }}</p>
                                 </div>
                             </div>
-                            <div class="content">
-                                Casamento formal com toda a familia
-                                <p> <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                            <div class="content ">
+                                <p>
+                                    Data Prevista: <time datetime="2016-1-1">{{ event.date_event }}</time>
                                 </p>
                             </div>
-                            <button class="button is-warning">Ver mais</button>
-                            <button class="button is-primary">Comprar Ingresso</button>
+                            <a href="{% url 'detail_event_view' slug=event.slug %}" class="button is-warning">Ver mais</a>
+                            <a href="{% url 'detail_event_view' slug=event.slug %}" class="button is-primary">Comprar Ingresso</a>
 
                         </div>
                     </div>
 
                 </div>
-                <div class="cell">
-
-
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="{% static 'events/img/5ca38adb-8667-4848-9b86-d9d3eb8fcbf7.png' %}"
-                                    alt="Placeholder image" />
-
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">Casamento de Wiliam</p>
-                                    <p class="subtitle is-6">lazaro wend</p>
-                                </div>
-                            </div>
-                            <div class="content">
-                                Casamento formal com toda a familia
-                                <p> <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                                </p>
-                            </div>
-                            <button class="button is-warning">Ver mais</button>
-                            <button class="button is-primary">Comprar Ingresso</button>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="cell">
-
-
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="{% static 'events/img/5ca38adb-8667-4848-9b86-d9d3eb8fcbf7.png' %}"
-                                    alt="Placeholder image" />
-
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">Casamento de Wiliam</p>
-                                    <p class="subtitle is-6">                                MG - Japonvar - Rua abc 123
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="content">
-                                Casamento formal com toda a familia
-                                <p> <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                                </p>
-                            </div>
-                            <button class="button is-warning">Ver mais</button>
-                            <button class="button is-primary">Comprar Ingresso</button>
-
-                        </div>
-                    </div>
-
-                </div>
+                {% endfor %}
+                {% endif %}
 
             </div>
         </div>

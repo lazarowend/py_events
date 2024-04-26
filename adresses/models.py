@@ -41,3 +41,8 @@ class Address(models.Model):
     road = models.CharField(max_length=100)
     number = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='address_user', default=None)
+    public = models.BooleanField(default=True)
+    
+    
+    def __str__(self):
+        return self.place_name
