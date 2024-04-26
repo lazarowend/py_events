@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 CHOICE_STATE = (
@@ -39,4 +40,4 @@ class Address(models.Model):
     district = models.CharField(max_length=100)
     road = models.CharField(max_length=100)
     number = models.IntegerField()
-
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='address_user', default=None)

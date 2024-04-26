@@ -20,7 +20,11 @@ class Event(models.Model):
     address = models.ForeignKey(Address, on_delete=models.PROTECT, related_name='address')
     max_tickets = models.IntegerField()
     price_ticket = models.BooleanField()
-
+    slug = models.SlugField(null=True, blank=True)
+    
+    
+    def __str__(self):
+        return self.name
 
 class Ticket(models.Model):
     event = models.ForeignKey(Event, on_delete=models.PROTECT, related_name='tickets')
