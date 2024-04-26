@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<nav class="navbar mb-5" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item title m-0" href="">
+            PyEvents
+        </a>
+
+    </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a href="{% url 'register_view' %}" class="button is-primary">
+                        <strong>Cadastre-se</strong>
+                    </a>                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="columns is-centered is-vcentered">
+    <div class="column is-half">
+        <form method="POST" class="box" action="{% url 'login_view' %}">
+            {% csrf_token %}
+            <div class="field">
+                <label class="label">Seu nome</label>
+                <div class="control">
+                    <input type="text" name="username" placeholder="Digite seu nome" class="input">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Sua senha</label>
+                <div class="control">
+                    <input type="password" name="password" placeholder="Digite sua senha" class="input">
+                </div>
+            </div>
+                        <div class="field is-grouped">
+                <div class="control">
+                    <button type="submit" class="button is-primary">Fazer Login</button>
+                </div>
+                <div class="control">
+                    <a href="{% url 'list_events' %}" class="button is-danger">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
