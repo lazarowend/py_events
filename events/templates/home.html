@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<nav class="navbar mb-5" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item title m-0" href="">
+            PyEvents
+        </a>
+
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">
+                <input class="input" name="search" type="text" placeholder="Buscar evento" />
+                <button class="button">Buscar</button>
+            </a>
+
+            <a class="navbar-item">
+                Criar Evento
+            </a>
+
+            <a class="navbar-item">
+                Meus Ingressos
+            </a>
+
+            <a class="navbar-item">
+                Meu Perfil
+            </a>
+
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary">
+                        <strong>Cadastre-se</strong>
+                    </a>
+                    <a class="button is-light">
+                        Faça Login
+                    </a>
+                    <a class="button is-light">
+                        Sair
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="events">
+    <div class="container mt-5 pt-5">
+        <div class="fixed-grid has-4-cols">
+            <div class="grid">
+                <div class="cell">
+
+
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="{% static 'events/img/5ca38adb-8667-4848-9b86-d9d3eb8fcbf7.png' %}"
+                                    alt="Placeholder image" />
+
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4">Casamento de Wiliam</p>
+                                    <p class="subtitle is-6">lazaro wend</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                Casamento formal com toda a familia
+                                <p> <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                </p>
+                            </div>
+                            <button class="button is-warning">Ver mais</button>
+                            <button class="button is-primary">Comprar Ingresso</button>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="cell">
+
+
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="{% static 'events/img/5ca38adb-8667-4848-9b86-d9d3eb8fcbf7.png' %}"
+                                    alt="Placeholder image" />
+
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4">Casamento de Wiliam</p>
+                                    <p class="subtitle is-6">lazaro wend</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                Casamento formal com toda a familia
+                                <p> <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                </p>
+                            </div>
+                            <button class="button is-warning">Ver mais</button>
+                            <button class="button is-primary">Comprar Ingresso</button>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="cell">
+
+
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="{% static 'events/img/5ca38adb-8667-4848-9b86-d9d3eb8fcbf7.png' %}"
+                                    alt="Placeholder image" />
+
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4">Casamento de Wiliam</p>
+                                    <p class="subtitle is-6">                                MG - Japonvar - Rua abc 123
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                Casamento formal com toda a familia
+                                <p> <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                </p>
+                            </div>
+                            <button class="button is-warning">Ver mais</button>
+                            <button class="button is-primary">Comprar Ingresso</button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
