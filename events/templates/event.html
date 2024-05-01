@@ -6,6 +6,46 @@
 {% include 'navbar.html' %}
 
 
+<div class="container">
+    <div class="fixed-grid mb-6">
+        <div class="grid mt-6">
+          <div class="cell">
+
+            <section class="section">
+                <h1 class="title">{{ event.name }}</h1>
+                <p class="ml-5">Organizado por: {{ event.user.username }}</p>
+                <h2 class="subtitle mt-5">Descrição do Evento:</h2>
+                <p class="ml-5">{{ event.description }}</p>
+                <h2 class="subtitle mt-5">Total de ingressos: {{ event.max_tickets }}</h2>
+                <h2 class="subtitle">Ingressos vendidos: {{ event.tickets_sold }}</h2>
+                <h2 class="subtitle mt-5">Local do evento:</h2>
+                <ul class="ml-5">
+                    <li>Cidade: {{ event.address.city }}</li>
+                    <li>Estado: {{ event.address.state }}</li>
+                    <li>Endereço: {{ event.address.road }} {{ event.address.number }} - {{ event.address.district }}</li>
+                </ul>
+                <h2 class="subtitle mt-5">Data e Hora</h2>
+                <p class="ml-5">{{ event.date_event }}</p>
+                <div class="buttons mt-6">
+                    <a class="button is-warning">Comprar Ingresso</a>
+                    <a href="{% url 'list_event_view' %}" class="button is-primary">Voltar</a>
+                </div>
+            </section>
+            
+
+          </div>
+          <div class="cell">
+
+            <figure class="box image is-1by1	
+            ">
+                <img src="{{ event.image.url }}" alt="{{ event.name }}" />
+              </figure>
+
+          </div>
+        </div>
+      </div>
+</div>
+
 
 
 {% endblock %}
