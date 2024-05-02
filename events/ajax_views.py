@@ -1,6 +1,8 @@
-from .models import Event
+from .models import Event, Ticket
 from django.http import JsonResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
+from adresses.models import Address
 
 
 def search_events(request, name):
@@ -29,11 +31,23 @@ def search_events(request, name):
     return JsonResponse(serialized_events, safe=False)
 
 
-def get_username(request, id):
-    user = User.objects.get(id=id)
+@login_required
+def get_infos_events_tickets_address_user(request):
+    user = request.user
+
+    amount_user_tickets_purchased = Ticket.objects.filter(user=user).count()
+
+    amount_user_tickets_sold = Event.objects.filter(user=user).aggregate(total_sold_tickets=Sum('tickets_sold'))['total_sold_tickets']
+
+    amount_user_created_events = Event.objects.filter(user=user).count()
+
+    amount_user_address = Address.objects.filter(user=user).count()
     
-    if user is None:
-        return JsonResponse({'status': 404})
-    
-    username = user.username    
-    return JsonResponse(username, safe=False)
+    serialized_amount = {
+        'amount_user_tickets_purchased': amount_user_tickets_purchased,
+        'amount_user_tickets_sold': amount_user_tickets_sold,
+        'amount_user_created_events': amount_user_created_events,
+        'amount_user_address': amount_user_address
+    }
+
+    return JsonResponse(serialized_amount)
