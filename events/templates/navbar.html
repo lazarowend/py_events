@@ -13,7 +13,7 @@
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
             {% if request.user.is_authenticated %}
-            <a class="navbar-item">
+            <a href="{% url 'create_event_view' %}" class="navbar-item">
                 Criar Evento
             </a>
 
@@ -21,7 +21,7 @@
                 Meus Ingressos
             </a>
 
-            <a class="navbar-item">
+            <a class="navbar-item" href="{% url 'list_user_event_view' %}">
                 Meus Eventos
             </a>
 

@@ -27,8 +27,12 @@
                 <h2 class="subtitle mt-5">Data e Hora</h2>
                 <p class="ml-5">{{ event.date_event }}</p>
                 <div class="buttons mt-6">
+                  {% if event.status %}
                     <a class="button is-warning">Comprar Ingresso</a>
-                    <a href="{% url 'list_event_view' %}" class="button is-primary">Voltar</a>
+                    {% else%}
+                    <a class="button is-warning" disabled>Evento Indisponivel</a>
+                    {% endif %}
+                    <a href="{% url 'list_event_view' %}" class="button is-success">Voltar</a>
                 </div>
             </section>
             

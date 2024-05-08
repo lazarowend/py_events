@@ -38,6 +38,7 @@ function SearchEvents(nameSearch) {
             if (!response.ok) {
                 console.log('Erro na solicitação');
             }
+            console.log(response)
             return response.json();
         })
         .then(function(data) {

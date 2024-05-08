@@ -74,19 +74,19 @@
 
             <div class="field is-grouped">
                 <div class="control">
-                    <button type="submit" class="button is-dark">Salvar</button>
+                    <button type="submit" class="button is-primary">Salvar</button>
                 </div>
                 <div class="control">
-                    <a href="{% url 'profile_view' %}" class="button is-dark">Cancelar</a>
+                    <a href="{% url 'profile_view' %}" class="button is-warning">Cancelar</a>
                 </div>
             </div>
         </form>
 
-        <button class="button is-dark" id="btn-editar">Editar</button>
+        <button class="button is-warning" id="btn-editar">Editar</button>
         <h2>Minha conta</h2>
-        <button class="button is-dark">Meus Ingressos</button>
-        <button class="button is-dark">Meus Eventos</button>
-        <button class="button is-dark">Meus Locais</button>
+        <button class="button is-link">Meus Ingressos</button>
+        <a href="{% url 'list_user_event_view' %}" class="button is-link">Meus Eventos</a>
+        <button class="button is-link">Meus Locais</button>
     </div>
 
 </div>

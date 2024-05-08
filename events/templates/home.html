@@ -46,7 +46,7 @@
                             <a href="{% url 'detail_event_view' slug=event.slug %} " class="button is-warning ">Ver mais</a>
                             <a href="{% url 'detail_event_view' slug=event.slug %} " class="button is-primary ">Comprar Ingresso</a> {% else %}
                             <a href="{% url 'detail_event_view' slug=event.slug %} " class="button is-warning ">Ver mais</a>
-                            <a class="button is-primary " disabled>Evento Esgotado</a> {% endif %}
+                            <a class="button is-primary " disabled>Evento Indisponivel</a> {% endif %}
                         </div>
                     </div>
 

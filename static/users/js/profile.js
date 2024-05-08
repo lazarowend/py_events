@@ -36,7 +36,6 @@ window.onload = () => {
             return response.json();
         })
         .then(function(data) {
-            console.log(data);
             amountCreateEvents.innerHTML = data['amount_user_created_events'];
             amountTicketsPurshased.innerHTML = data['amount_user_tickets_purchased'];
             amountTicketsSold.innerHTML = data['amount_user_tickets_sold'];
