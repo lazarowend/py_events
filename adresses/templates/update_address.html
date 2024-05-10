@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% load static %} {% block content %} {% include 'navbar.html' %}
+
+<div class="container mt-6">
+
+        <form method="POST" action="{% url 'update_address_view' address.pk %}" id="user-form">
+            {% csrf_token %}
+            <div class="field">
+                <label class="label">Apelido do local</label>
+                <div class="control">
+                    {{ form.place_name }}
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Selecione o Estado</label>
+                <div class="control">
+                    {{ form.state }}
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Cidade</label>
+                <div class="control">
+                    {{ form.city }}
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Bairro</label>
+                <div class="control">
+                    {{ form.district }}
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Rua</label>
+                <div class="control">
+                    {{ form.road }}
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Numero</label>
+                <div class="control">
+                    {{ form.number }}
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Defina a Privacidade</label>
+                <div class="control">
+                    {{ form.public }}
+                </div>
+            </div>
+
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <button type="submit" class="button is-primary">Salvar</button>
+                </div>
+                <div class="control">
+                    <a href="{% url 'list_address_view' %}" class="button is-warning">Cancelar</a>
+                </div>
+            </div>
+        </form>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+ {% extends 'base.html' %} {% load static %} {% block content %} {% include 'navbar.html' %}
+
+
+<div class="container mt-6">
+    <table class="table m-auto">
+        <thead>
+            <tr>
+                <th>Apelido</th>
+                <th>Estado</th>
+                <th>Cidade</th>
+                <th>Endereço</th>
+                <th>Status</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if adresses %} {% for address in adresses %}
+            <tr>
+                <td>{{ address.place_name }}</td>
+                <td>{{ address.state }}</td>
+                <td>{{ address.city }}</td>
+                <td>{{ address.road }} {{ address.number }} - {{ address.district }}</td>
+                {% if address.public %}
+                <td>Público</td>
+                {% else %}
+                <td>Particular</td>
+                {% endif %}
+                <td>
+                    <a href="{% url 'update_address_view' address.pk %}" class="button is-warning">Editar</a>
+                    <a href="{% url 'delete_address_view' address.pk %}" class="button is-danger">Exluir</a>
+                </td>
+            </tr>
+            {% endfor %} {% endif %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}
