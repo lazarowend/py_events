@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <nav class="navbar mb-5" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
@@ -10,17 +8,26 @@
 
     </div>
 
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a href="{% url 'login_view' %}" class="button is-light">
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <div class="buttons">
+                <a href="{% url 'login_view' %}" class="button is-light">
                         Faça Login
                     </a>
-                </div>
             </div>
         </div>
     </div>
+    </div>
 </nav>
+
+{% if messages %} {% for m in messages %}
+<div class="container">
+    <div class="notification {{ m.tags }} is-light m-6">
+        <button class="delete"></button> {{ m }}
+    </div>
+</div>
+{% endfor %} {% endif %}
+
 
 <div class="columns is-centered is-vcentered">
     <div class="column is-half">

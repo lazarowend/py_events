@@ -1,6 +1,12 @@
 {% extends 'base.html' %} {% load static %} {% block content %} {% include 'navbar.html' %}
 
-
+{% if messages %} {% for m in messages %}
+<div class="container">
+    <div class="notification {{ m.tags }} is-light m-6">
+        <button class="delete"></button> {{ m }}
+    </div>
+</div>
+{% endfor %} {% endif %}
 <div class="events">
     <div class="container mt-5 pt-5 ">
 

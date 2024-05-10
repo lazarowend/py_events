@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+from django.contrib.messages import constants
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -134,4 +135,15 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# CORSS
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+# MESSAGES
+
+MESSAGE_TAGS = {
+    constants.WARNING: 'is-warning',
+    constants.SUCCESS: 'is-success',
+    constants.INFO: 'is-info',
+    constants.ERROR: 'is-danger',
+}

@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, View, UpdateView
 from django.contrib.auth.models import User
 from .forms import UserForm
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
@@ -11,24 +11,19 @@ from django.contrib import messages
 
 class LoginUserView(View):
     
-    
     def get(self, request):
         return render(request, 'login.html')
 
-    
     def post(self, request):
-        username = request.POST['username']
-        password = request.POST['password']
-        
-        user = User.objects.get(username=username, password=password)
-        
+        user = authenticate(self.request, username=request.POST['username'],
+                            password=request.POST['password'])
         if user is not None:
             login(request, user)
+            messages.add_message(self.request, messages.constants.SUCCESS ,'User logado')
             return redirect('/events/')
-
         else:
-            print('aqui')
-            return render(request, 'login.html', {'error_message': 'Nome de usuário ou senha incorretos.'})
+            messages.add_message(self.request, messages.constants.ERROR ,'Nome de usuário ou senha incorretos.')
+            return render(request, 'login.html')
 
         
 
@@ -36,17 +31,20 @@ class CreateUserView(CreateView):
     model = User
     template_name = 'register.html'
     form_class = UserForm
-    success_url = reverse_lazy('list_events')
+    success_url = reverse_lazy('login_view')
 
     def form_valid(self, form):
-        if User.objects.filter(username=form.cleaned_data['username']).exists():
-            messages.error(self.request, 'Este nome já está em uso.')
-            return self.form_invalid(form)
-        
-        if User.objects.filter(email=form.cleaned_data['email']).exists():
-            messages.error(self.request, 'Este email já está em uso.')
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
+                
+        if User.objects.filter(email=email).exists():
+            messages.add_message(self.request, messages.constants.ERROR ,'Este email já está em uso.')
             return self.form_invalid(form)
 
+        user = form.save(commit=False)
+        user.set_password(password)
+        user.save()
+        messages.add_message(self.request, messages.constants.SUCCESS ,'Registrado com Sucesso')
         return super().form_valid(form)
 
 

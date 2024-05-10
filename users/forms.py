@@ -11,3 +11,4 @@ class UserForm(forms.ModelForm):
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Descrição da Tarefa...'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input', 'placeholder': 'Senha...'}))
 
+    
