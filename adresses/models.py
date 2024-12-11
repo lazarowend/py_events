@@ -34,15 +34,14 @@ CHOICE_STATE = (
 
 
 class Address(models.Model):
-    place_name = models.CharField(max_length=150)
+    zip_code = models.CharField(max_length=8)
     state = models.CharField(max_length=2, choices=CHOICE_STATE)
     city = models.CharField(max_length=150)
     district = models.CharField(max_length=100)
     road = models.CharField(max_length=100)
     number = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='address_user', default=None)
-    public = models.BooleanField(default=True)
-    
-    
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='address_user')
+
+
     def __str__(self):
-        return self.place_name
+        return self.zip_code

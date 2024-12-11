@@ -4,5 +4,8 @@ from .models import Address
 
 @admin.register(Address)
 class AdminAddress(admin.ModelAdmin):
-    list_display = ('place_name', 'state', 'city', 'district', 'road', 'user')
-    search_fields = ('place_name',)
+    list_display = ('zip_code', 'state', 'city', 'district', 'road', 'get_user')
+    search_fields = ('zip_code',)
+
+    def get_user(self, obj):
+            return obj.user.username

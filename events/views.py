@@ -8,7 +8,7 @@ from .forms import EventForm
 
 class ListEventView(ListView):
     model = Event
-    template_name = 'home.html'
+    template_name = 'events/home.html'
     context_object_name = 'events'
     
     queryset = Event.objects.order_by('status', 'date_event')
