@@ -2,58 +2,53 @@
 
 {% block content %}
 
-<nav class="navbar mb-5" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item title m-0" href="">
-            PyEvents
-        </a>
 
-    </div>
 
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a href="{% url 'register_view' %}" class="button is-primary">
-                        <strong>Cadastre-se</strong>
-                    </a>                </div>
+
+<section class="bg-gray-50 dark:bg-gray-900 h-screen flex items-center">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
+        <div class="flex flex-col justify-center">
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Encontre e Cadastre os melhores Eventos Aqui!!</h1>
+            <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Essa plataforma foi desenvolvida para te dar todo o suporte para gerenciamento de Eventos, desde o cadastro até a compra de Ingressos</p>
+            <a href="{% url 'list_event_view' %}" class="text-blue-600 dark:text-blue-500 hover:underline font-medium text-lg inline-flex items-center">Saiba mais na Plataforma 
+
+                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+            </a>
+        </div>
+        <div>
+            <div class="w-full lg:max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+                    Entre no YourEvents
+                </h2>
+                <form class="mt-8 space-y-6" method="POST" action="{% url 'login_user_view' %}">{% csrf_token %}
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu Email</label>
+                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@exemple.com" required />
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sua Senha</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input id="remember" aria-describedby="remember" name="remember" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" required />
+                        </div>
+                        <div class="ms-3 text-sm">
+                        <label for="remember" class="font-medium text-gray-500 dark:text-gray-400">Lembre deste dispositivo</label>
+                        </div>
+                        <a href="#" class="ms-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Esqueceu a senha?</a>
+                    </div>
+                    <button type="submit" class="w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar com sua Conta</button>
+                    <div class="text-sm font-medium text-gray-900 dark:text-white">
+                        Não é registrado? <a href="{% url 'register_user_view' %}" class="text-blue-600 hover:underline dark:text-blue-500">Crie sua Conta</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</nav>
-{% if messages %} {% for m in messages %}
-<div class="container">
-    <div class="notification {{ m.tags }} is-light m-6">
-        <button class="delete"></button> {{ m }}
-    </div>
-</div>
-{% endfor %} {% endif %}
+</section>
 
-<div class="columns is-centered is-vcentered">
-    <div class="column is-half">
-        <form method="POST" class="box" action="{% url 'login_view' %}">
-            {% csrf_token %}
-            <div class="field">
-                <label class="label">Seu nome</label>
-                <div class="control">
-                    <input type="text" name="username" placeholder="Digite seu nome" class="input">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Sua senha</label>
-                <div class="control">
-                    <input type="password" name="password" placeholder="Digite sua senha" class="input">
-                </div>
-            </div>
-                        <div class="field is-grouped">
-                <div class="control">
-                    <button type="submit" class="button is-primary">Fazer Login</button>
-                </div>
-                <div class="control">
-                    <a href="{% url 'list_event_view' %}" class="button is-warning">Cancelar</a>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
 {% endblock %}

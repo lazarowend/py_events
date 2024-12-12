@@ -12,10 +12,20 @@ from django.contrib import messages
 class LoginUserView(View):
     
     def get(self, request):
-        return render(request, 'login.html')
+        return render(request, 'users/login.html')
 
     def post(self, request):
-        user = authenticate(self.request, username=request.POST['username'],
+        email = request.POST['email']
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(
+                request,
+                'Usuário não encontrado com esse email.'
+            )
+            return redirect('/events/login/')
+        
+        user = authenticate(self.request, username=user.username,
                             password=request.POST['password'])
         if user is not None:
             login(request, user)
@@ -29,9 +39,9 @@ class LoginUserView(View):
 
 class CreateUserView(CreateView):
     model = User
-    template_name = 'register.html'
+    template_name = 'users/register.html'
     form_class = UserForm
-    success_url = reverse_lazy('login_view')
+    success_url = reverse_lazy('login_user_view')
 
     def form_valid(self, form):
         email = form.cleaned_data['email']
@@ -50,8 +60,8 @@ class CreateUserView(CreateView):
 
 
 class LogoutUserView(View):
-    
-    
+
+
     def get(self, request):
         logout(request)
         return redirect('list_event_view')
@@ -67,4 +77,3 @@ class UpdateUserView(UpdateView):
     
     def get_object(self, queryset=None):
         return self.request.user
-
