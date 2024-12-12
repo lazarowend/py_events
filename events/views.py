@@ -8,7 +8,7 @@ from django. shortcuts import render
 
 
 class ListEventView(View):
-    
+
     def get(self, request):
         events = Event.objects.order_by('status', 'date_event')
         data = []
@@ -18,7 +18,7 @@ class ListEventView(View):
                 {
                     'event': event,
                     'image': image
-                 }
+                }
             )
 
         data = sorted(data, key=lambda x: (x['event'].status, x['event'].date_event))
@@ -42,7 +42,7 @@ class ListUserEventView(ListView):
     model = Event
     template_name = 'my_events.html'
     context_object_name = 'events'
-    
+
     def get_queryset(self):
         return Event.objects.filter(user=self.request.user)
 
@@ -52,8 +52,8 @@ class CreateEventView(CreateView):
     model = Event
     template_name = 'new_event.html'
     form_class = EventForm
-    success_url = reverse_lazy('list_user_event_view') 
-    
+    success_url = reverse_lazy('list_user_event_view')
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)

@@ -17,7 +17,6 @@ class EventForm(forms.ModelForm):
         if user:
             self.fields['address'].queryset = Address.objects.filter(user=user)
 
-
     class Meta:
         model = Event
         fields = [
@@ -31,6 +30,6 @@ class EventForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Nome do evento'}))
     type_event = forms.ChoiceField(choices=CHOICE_TYPE, widget=forms.Select(attrs={'class': 'input'}))
     description = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Descrição do evento'}))
-    date_event = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'input', 'placeholder': 'YYYY-MM-DD HH:MM', 'type':'datetime-local'}))  # Especificar o formato esperado
+    date_event = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'input', 'placeholder': 'YYYY-MM-DD HH:MM', 'type': 'datetime-local'}))
     address = forms.ModelChoiceField(
         queryset=Address.objects.none(), widget=forms.Select(attrs={'class': 'input'}))

@@ -34,6 +34,7 @@ CHOICE_STATE = (
 
 
 class AddressForm(forms.ModelForm):
+
     class Meta:
         model = Address
         fields = [
@@ -44,8 +45,7 @@ class AddressForm(forms.ModelForm):
             'road',
             'number',
         ]
-    
-    
+
     zip_code = forms.CharField(label='CEP', widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'CEPS'}))
     state = forms.ChoiceField(label='Selecione o Estado', choices=CHOICE_STATE, widget=forms.Select(attrs={'class': 'input', 'placeholder': 'Selecione o Estado'}))
     city = forms.CharField(label='Cidade', widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Cidade'}))

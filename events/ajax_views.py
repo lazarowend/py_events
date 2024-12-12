@@ -27,7 +27,7 @@ def search_events(request, name):
         }
         for event in events
     ]
-    
+
     return JsonResponse(serialized_events, safe=False)
 
 
@@ -42,7 +42,7 @@ def get_infos_events_tickets_address_user(request):
     amount_user_created_events = Event.objects.filter(user=user).count()
 
     amount_user_address = Address.objects.filter(user=user).count()
-    
+
     serialized_amount = {
         'amount_user_tickets_purchased': amount_user_tickets_purchased,
         'amount_user_tickets_sold': amount_user_tickets_sold,

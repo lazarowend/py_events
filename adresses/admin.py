@@ -8,4 +8,4 @@ class AdminAddress(admin.ModelAdmin):
     search_fields = ('zip_code',)
 
     def get_user(self, obj):
-            return obj.user.username
+        return obj.user.username

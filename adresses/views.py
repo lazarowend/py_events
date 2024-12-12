@@ -12,8 +12,7 @@ class ListAddressView(ListView):
     model = Address
     template_name = 'address.html'
     context_object_name = 'adresses'
-    
-    
+
     def get_queryset(self):
         return Address.objects.filter(user=self.request.user)
 
@@ -24,11 +23,11 @@ class CreateAddressView(CreateView):
     template_name = 'new_address.html'
     form_class = AddressForm
     success_url = reverse_lazy('list_user_event_view')
-    
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-    
+
 
 class UpdateAddressView(UpdateView):
     model = Address
@@ -39,7 +38,7 @@ class UpdateAddressView(UpdateView):
 
 
 class DeleteAddressView(View):
-    
+
     def get(self, request, pk):
         address = Address.objects.get(pk=pk)
         address.delete()

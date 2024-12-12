@@ -12,9 +12,11 @@ def generate_image_filename(instance, filename):
         return os.path.join('events', uuid_filename)
     return filename
 
+
 @receiver(pre_save, sender=EventImage)
 def rename_event_image(sender, instance, **kwargs):
     instance.image.name = generate_image_filename(instance, instance.image.name)
+
 
 @receiver(pre_save, sender=Event)
 def set_slug_event(sender, instance, **kwargs):

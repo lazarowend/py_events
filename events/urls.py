@@ -10,11 +10,9 @@ urlpatterns = [
     path('events/create_event', CreateEventView.as_view(), name='create_event_view')
 ]
 
-
 ajax_urlpatterns = [
     path('events/search_events/<str:name>', search_events, name='search_events'),
     path('events/get_infos_events_tickets_address_user', get_infos_events_tickets_address_user, name='get_infos_events_tickets_address_user'),
 ]
-
 
 urlpatterns += ajax_urlpatterns

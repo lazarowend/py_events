@@ -11,13 +11,11 @@ CHOICE_EVENT_TYPE = (
 CHOICE_TICKET_TYPE = (
     ('Inteira', 'Inteira'),
     ('Meia', 'Meia'),
-    
 )
 
 CHOICE_IMAGE_TYPE = (
     ('Principal', 'Principal'),
     ('Extra', 'Extra'),
-    
 )
 
 

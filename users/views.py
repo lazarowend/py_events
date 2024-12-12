@@ -10,7 +10,7 @@ from django.contrib import messages
 
 
 class LoginUserView(View):
-    
+
     def get(self, request):
         return render(request, 'users/login.html')
 
@@ -24,18 +24,17 @@ class LoginUserView(View):
                 'Usuário não encontrado com esse email.'
             )
             return redirect('/events/login/')
-        
+
         user = authenticate(self.request, username=user.username,
                             password=request.POST['password'])
         if user is not None:
             login(request, user)
-            messages.add_message(self.request, messages.constants.SUCCESS ,'User logado')
+            messages.add_message(self.request, messages.constants.SUCCESS, 'User logado')
             return redirect('/events/')
         else:
-            messages.add_message(self.request, messages.constants.ERROR ,'Nome de usuário ou senha incorretos.')
+            messages.add_message(self.request, messages.constants.ERROR, 'Nome de usuário ou senha incorretos.')
             return render(request, 'login.html')
 
-        
 
 class CreateUserView(CreateView):
     model = User
@@ -46,21 +45,19 @@ class CreateUserView(CreateView):
     def form_valid(self, form):
         email = form.cleaned_data['email']
         password = form.cleaned_data['password']
-                
+
         if User.objects.filter(email=email).exists():
-            messages.add_message(self.request, messages.constants.ERROR ,'Este email já está em uso.')
+            messages.add_message(self.request, messages.constants.ERROR, 'Este email já está em uso.')
             return self.form_invalid(form)
 
         user = form.save(commit=False)
         user.set_password(password)
         user.save()
-        messages.add_message(self.request, messages.constants.SUCCESS ,'Registrado com Sucesso')
+        messages.add_message(self.request, messages.constants.SUCCESS, 'Registrado com Sucesso')
         return super().form_valid(form)
 
 
-
 class LogoutUserView(View):
-
 
     def get(self, request):
         logout(request)
@@ -74,6 +71,6 @@ class UpdateUserView(UpdateView):
     context_object_name = 'user'
     form_class = UserForm
     success_url = reverse_lazy('profile_view')
-    
+
     def get_object(self, queryset=None):
         return self.request.user

@@ -42,6 +42,5 @@ class Address(models.Model):
     number = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='address_user')
 
-
     def __str__(self):
         return self.zip_code

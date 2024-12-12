@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from pathlib import Path
-from django.contrib.messages import constants
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,9 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'corsheaders',
-    
+
     'events',
     'adresses',
     'users',
@@ -40,9 +39,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    
+
     'corsheaders.middleware.CorsMiddleware',
-    
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -133,13 +132,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORSS
 CORS_ALLOW_ALL_ORIGINS = True
-
-
-# MESSAGES
-
-MESSAGE_TAGS = {
-    constants.WARNING: 'is-warning',
-    constants.SUCCESS: 'is-success',
-    constants.INFO: 'is-info',
-    constants.ERROR: 'is-danger',
-}
