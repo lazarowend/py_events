@@ -12,9 +12,9 @@ CHOICE_TYPE = (
 class EventForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)  # Pega o user passado na view
+        user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
-        if user:  # Se o usuário for passado
+        if user:
             self.fields['address'].queryset = Address.objects.filter(user=user)
 
 

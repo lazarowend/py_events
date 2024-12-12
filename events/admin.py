@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, Ticket, TicketType
+from .models import Event, Ticket, TicketType, EventImage
 
 @admin.register(Event)
 class AdminEvent(admin.ModelAdmin):
@@ -17,3 +17,9 @@ class AdminTicket(admin.ModelAdmin):
 class AdminTicketType(admin.ModelAdmin):
     list_display = ('type_name',)
     search_fields = ('type_name',)
+
+
+@admin.register(EventImage)
+class AdminEventImage(admin.ModelAdmin):
+    list_display = ('event',)
+    search_fields = ('event',)

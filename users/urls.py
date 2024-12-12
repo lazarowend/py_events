@@ -3,8 +3,8 @@ from .views import LoginUserView, CreateUserView, LogoutUserView, UpdateUserView
 
 
 urlpatterns = [
-    path('events/login/', LoginUserView.as_view(), name='login_view'),
-    path('events/register/', CreateUserView.as_view(), name='register_view'),
-    path('events/logout/', LogoutUserView.as_view(), name='logout_view'),
+    path('events/login/', LoginUserView.as_view(), name='login_user_view'),
+    path('events/register/', CreateUserView.as_view(), name='register_user_view'),
+    path('events/logout/', LogoutUserView.as_view(), name='logout_user_view'),
     path('events/profile/', UpdateUserView.as_view(), name='profile_view'),
 ]

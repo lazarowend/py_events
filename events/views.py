@@ -1,17 +1,32 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
-from .models import Event
+from django.views.generic import ListView, DetailView, CreateView, View
+from .models import Event, EventImage
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .forms import EventForm
+from django. shortcuts import render
 
 
-class ListEventView(ListView):
-    model = Event
-    template_name = 'events/home.html'
-    context_object_name = 'events'
+class ListEventView(View):
     
-    queryset = Event.objects.order_by('status', 'date_event')
+    def get(self, request):
+        events = Event.objects.order_by('status', 'date_event')
+        data = []
+        for event in events:
+            image = EventImage.objects.get(event=event, type_image='Principal')
+            data.append(
+                {
+                    'event': event,
+                    'image': image
+                 }
+            )
+
+        data = sorted(data, key=lambda x: (x['event'].status, x['event'].date_event))
+        return render(
+            request,
+            'events/home.html',
+            context={'data': data}
+        )
 
 
 class DetailEventView(DetailView):

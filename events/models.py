@@ -14,6 +14,12 @@ CHOICE_TICKET_TYPE = (
     
 )
 
+CHOICE_IMAGE_TYPE = (
+    ('Principal', 'Principal'),
+    ('Extra', 'Extra'),
+    
+)
+
 
 class Event(models.Model):
     name = models.CharField(max_length=150)
@@ -49,7 +55,8 @@ class Ticket(models.Model):
 
 class EventImage(models.Model):
     event = models.ForeignKey(Event, on_delete=models.PROTECT, related_name='event_images')
-    image = models.ImageField(upload_to='events/') 
+    image = models.ImageField(upload_to='events/')
+    type_image = models.CharField(choices=CHOICE_IMAGE_TYPE, max_length=50)
 
     def __str__(self):
         return f'{self.event}'
