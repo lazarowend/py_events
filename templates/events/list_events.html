@@ -7,8 +7,9 @@
 
 </div>
 
+{% include 'base/messages.html' %}
 
-<form class="max-w-md mx-auto mt-30">
+<form class="max-w-md mx-auto px-2 mt-30">
     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Buscar</label>
     <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -56,7 +57,7 @@
                     <h1 class="text-1xl sm:text-2xl lg:text-3xl"><b>{{ item.event.name }}</b></h1>
                     <p class="text-sm font-medium text-gray-700 dark:text-gray-400">Por: Lázaro wendel</p>
                     <p class="text-sm font-medium text-gray-700 dark:text-gray-400">
-                        Data e Hora: {{ item.event.date_event }}</p>
+                        Data e Hora: {{ item.event.date_event|date:"d/m/Y - H:i" }}hrs</p>
                     <p class="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">Endereço: Rua Padre Chico 266,
                         Centro</p>
                     {% if item.event.status %}
@@ -69,7 +70,7 @@
                         <span
                             class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Indisponível</span>
                     </p>
-                    {% endif %} <a href="#"
+                    {% endif %} <a href="{% url 'detail_event_view' item.event.slug %}"
                         class=" text-center text-white mt-2 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 m-5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Ver
                         Mais</a>
                 </div>

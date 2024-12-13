@@ -25,14 +25,14 @@ class LoginUserView(View):
             )
             return redirect('/events/login/')
 
-        user = authenticate(self.request, username=user.username,
+        user = authenticate(request, username=user.username,
                             password=request.POST['password'])
         if user is not None:
             login(request, user)
-            messages.add_message(self.request, messages.constants.SUCCESS, 'User logado')
+            messages.success(request, 'Usuário Logado')
             return redirect('/events/')
         else:
-            messages.add_message(self.request, messages.constants.ERROR, 'Nome de usuário ou senha incorretos.')
+            messages.error(request, 'Nome de usuário ou senha incorretos.')
             return render(request, 'login.html')
 
 
@@ -47,13 +47,13 @@ class CreateUserView(CreateView):
         password = form.cleaned_data['password']
 
         if User.objects.filter(email=email).exists():
-            messages.add_message(self.request, messages.constants.ERROR, 'Este email já está em uso.')
+            messages.error(self.request, 'Este email já está em uso.')
             return self.form_invalid(form)
 
         user = form.save(commit=False)
         user.set_password(password)
         user.save()
-        messages.add_message(self.request, messages.constants.SUCCESS, 'Registrado com Sucesso')
+        messages.success(self.request, 'Registrado com Sucesso')
         return super().form_valid(form)
 
 
