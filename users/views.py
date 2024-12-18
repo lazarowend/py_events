@@ -7,6 +7,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
+from adresses.models import Address
 
 
 class LoginUserView(View):
@@ -67,10 +68,18 @@ class LogoutUserView(View):
 @method_decorator(login_required(login_url='login_view'), name='dispatch')
 class UpdateUserView(UpdateView):
     model = User
-    template_name = 'profile.html'
+    template_name = 'users/detail_user.html'
     context_object_name = 'user'
     form_class = UserForm
     success_url = reverse_lazy('profile_view')
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['user'] = User.objects.get(id=self.request.user.id)
+        context['adresses'] = Address.objects.filter(user=self.request.user.id)
+
+        return context

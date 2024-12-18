@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView, View
+from django.views.generic import CreateView, UpdateView, View
 from .models import Address
 from .forms import AddressForm
 from django.contrib.auth.decorators import login_required
@@ -8,19 +8,9 @@ from django.utils.decorators import method_decorator
 
 
 @method_decorator(login_required(login_url='login_view'), name='dispatch')
-class ListAddressView(ListView):
-    model = Address
-    template_name = 'address.html'
-    context_object_name = 'adresses'
-
-    def get_queryset(self):
-        return Address.objects.filter(user=self.request.user)
-
-
-@method_decorator(login_required(login_url='login_view'), name='dispatch')
 class CreateAddressView(CreateView):
     model = Address
-    template_name = 'new_address.html'
+    template_name = 'adresses/create_address.html'
     form_class = AddressForm
     success_url = reverse_lazy('list_user_event_view')
 
@@ -31,10 +21,10 @@ class CreateAddressView(CreateView):
 
 class UpdateAddressView(UpdateView):
     model = Address
-    template_name = 'update_address.html'
+    template_name = 'adresses/update_address.html'
     context_object_name = 'address'
     form_class = AddressForm
-    success_url = reverse_lazy('list_address_view')
+    success_url = reverse_lazy('detail_user_view')
 
 
 class DeleteAddressView(View):

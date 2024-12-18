@@ -41,6 +41,7 @@ class Address(models.Model):
     road = models.CharField(max_length=100)
     number = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='address_user')
-
+    name = models.CharField(max_length=150)
+    
     def __str__(self):
-        return self.zip_code
+        return f'{self.name} - {self.road} {self.number} - {self.district}, {self.city} - {self.state}'

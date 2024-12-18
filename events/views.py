@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Event, EventImage, Ticket
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -46,7 +46,7 @@ class DetailEventView(DetailView):
 @method_decorator(login_required(login_url='login_view'), name='dispatch')
 class ListUserEventView(ListView):
     model = Event
-    template_name = 'my_events.html'
+    template_name = 'events/my_events.html'
     context_object_name = 'events'
 
     def get_queryset(self):
@@ -56,10 +56,32 @@ class ListUserEventView(ListView):
 @method_decorator(login_required(login_url='login_view'), name='dispatch')
 class CreateEventView(CreateView):
     model = Event
-    template_name = 'new_event.html'
+    template_name = 'events/create_event.html'
     form_class = EventForm
     success_url = reverse_lazy('list_user_event_view')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+
+class UpdateEventView(UpdateView):
+    model = Event
+    template_name = 'events/update_event.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    form_class = EventForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['event'] = Event.objects.get(id=self.object.id)
+        context['images'] = EventImage.objects.filter(event=self.object)
+        context['tickets'] = Ticket.objects.filter(event=self.object)
+
+        return context

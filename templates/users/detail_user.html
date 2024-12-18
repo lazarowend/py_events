@@ -1,0 +1,81 @@
+{% extends 'base/_base.html' %} {% load static %} {% block content %} {% include 'base/navbar.html' %}
+
+<div class="div flex items-center flex-col justify-center p-2">
+    <div class="max-w-md w-full div flex items-center justify-between">
+        <h1 class="my-5 px-5 text-start tracking-tight text-gray-500 md:text-lg dark:text-gray-400">Informações Pessoais
+        </h1>
+        <a href=""
+            class="flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</a>
+    </div>
+    <dl class="max-w-md w-full text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+        <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Nome de Usuário</dt>
+            <dd class="text-lg font-semibold">{{ user.username }}</dd>
+        </div>
+        <div class="flex flex-col py-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Email</dt>
+            <dd class="text-lg font-semibold">{{ user.email }}</dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Cadastrado em</dt>
+            <dd class="text-lg font-semibold">{{ user.date_joined|date:"d/m/Y" }}</dd>
+        </div>
+    </dl>
+    <div class="max-w-md w-full mt-4 div flex items-center justify-between">
+        <h1 class="my-5 px-5 text-start tracking-tight text-gray-500 md:text-lg dark:text-gray-400">Endereços</h1>
+        <a href="{% url 'create_address_view' %}"
+            class="flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Novo
+            Endereço</a>
+    </div>
+
+
+    <div class="relative max-w-lg w-full overflow-x-auto sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <caption
+                class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                Seus Endereços
+                <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"></p>
+            </caption>
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Endereço
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Nome
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Editar</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if adresses %}
+                {% for address in adresses %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{address.road}} - {{address.number}}, {{address.ditrict}}, {{address.city}} - {{address.state}}
+                    </th>
+                    <td class="px-6 py-4 text-right">
+                        {{address.name}}
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="{% url 'update_address_view' address.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4 text-right">
+                        Você não tem nenhum endereço cadastrado.
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+{% endblock %}

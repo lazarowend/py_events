@@ -28,7 +28,7 @@ class Event(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='event_user')
     address = models.ForeignKey(Address, on_delete=models.PROTECT, related_name='address')
     slug = models.SlugField(null=True, blank=True)
-    status = models.BooleanField(default=True)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -46,6 +46,7 @@ class Ticket(models.Model):
     ticket_type = models.ForeignKey(TicketType, on_delete=models.PROTECT, related_name='ticket_type')
     price = models.DecimalField(decimal_places=2, max_digits=15)
     amount = models.IntegerField(default=1)
+    amount_sold = models.IntegerField(default=0)
 
     def __str__(self):
         return f'{self.event}'

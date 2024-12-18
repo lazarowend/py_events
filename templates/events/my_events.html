@@ -1,48 +1,81 @@
-{% extends 'base.html' %} {% load static %} {% block content %} {% include 'navbar.html' %}
+{% extends 'base/_base.html' %} {% load static %} {% block content %} {% include 'base/navbar.html' %}
 
-<div class="container mt-6">
-    <div class="buttons is-flex is-justify-content-flex-end	">
-        <button class="button is-primary">Criar Novo Evento</button>
+
+
+<form class="max-w-md mx-auto px-2 mt-30">
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Buscar</label>
+    <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+        </div>
+        <input type="search" id="default-search"
+            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Procure eventos" required />
+        <button type="submit"
+            class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buscar</button>
+    </div>
+</form>
+
+<div class="flex justify-center mt-5 pt-5">
+
+    <div class="m-2 max-w-xll overflow-x-auto sm:rounded-lg">
+
+        <a href="{% url 'create_event_view' %}" type="button"
+            class="mb-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Novo Evento</a>
+
+        <table class="relative w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Nome do Evento
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Data do Evento
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Endereço
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ event.name }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ event.date_event|date:"d/m/Y - H:i" }}hrs
+                    </td>
+                    <td class="px-6 py-4">
+                        {% if event.status %}
+                        <span
+                            class="inline bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Disponível</span>
+                        {% else %}
+                        <span
+                            class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Indisponível</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ event.address.road }} - {{event.address.number}}, {{ event.address.district }}, {{event.address.city}} - {{event.address.state}}
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="{% url 'update_event_view' event.slug %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-    <table class="table m-auto">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Ingressos totais</th>
-                <th>Ingressos vendidos</th>
-                <th>Local</th>
-                <th>Data e hora</th>
-                <th>Status</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if events %} {% for event in events %}
-            <tr>
-                <td>{{ event.name }}</td>
-                <td>{{ event.max_tickets }}</td>
-                <td>{{ event.tickets_sold }}</td>
-                <td>{{ event.address.state }} - {{ event.address.city }} - {{ event.address.road }} {{ event.address.number }} - {{ event.address.district }}</td>
-                <td>{{ event.date_event }}</td>
-                {% if event.status %}
-                <td>Ativo</td>
-                {% else %}
-                <td>Desativado</td>
-                {% endif %}
-                <td>
-                    {% if event.status %}
-                    <button class="button is-warning">Editar</button>
-                    <button class="button is-danger">Desativar</button> {% else %}
-                    <button class="button is-warning">Editar</button>
-                    <button class="button is-danger" disabled>Desativar</button> {% endif %}
-                </td>
-            </tr>
-            {% endfor %} {% endif %}
-        </tbody>
-    </table>
-
 </div>
-
 
 {% endblock %}

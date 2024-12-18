@@ -44,11 +44,57 @@ class AddressForm(forms.ModelForm):
             'district',
             'road',
             'number',
+            'name'
         ]
 
-    zip_code = forms.CharField(label='CEP', widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'CEPS'}))
-    state = forms.ChoiceField(label='Selecione o Estado', choices=CHOICE_STATE, widget=forms.Select(attrs={'class': 'input', 'placeholder': 'Selecione o Estado'}))
-    city = forms.CharField(label='Cidade', widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Cidade'}))
-    district = forms.CharField(label='Bairro', widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Bairro'}))
-    road = forms.CharField(label='Rua', widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Rua'}))
-    number = forms.IntegerField(label='Número', widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Número'}))
+    zip_code = forms.CharField(
+        max_length=10,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', 'placeholder': 'CEP'
+            }
+        )
+    )
+    state = forms.ChoiceField(
+        choices=CHOICE_STATE,
+        widget=forms.Select(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', 'placeholder': 'Estado'
+            }
+        )
+    )
+    city = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', 'placeholder': 'Cidade'
+            }
+        )
+    )
+    district = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', 'placeholder': 'Bairro'
+            }
+        )
+    )
+    road = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', 'placeholder': 'Rua'
+            }
+        )
+    )
+    number = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', 'placeholder': 'N°'
+            }
+        )
+    )
+    name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', 'placeholder': 'Dê um nome a este Endereço'
+            }
+        )
+    )
