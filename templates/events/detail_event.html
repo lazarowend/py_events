@@ -62,18 +62,18 @@
       <p class="mb-1 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Organização:
         {{event.user.username}}</p>
       <p class="mb-4 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 text-justify">Descrição:
-        {{event.description}} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto molestias alias
-        voluptate dolorum aliquam non obcaecati quis repudiandae ex impedit voluptatem, aut labore illo. Illum facilis
-        culpa consectetur eius enim.</p>
+        {{event.description}}</p>
       <p class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Data e Hora: {{ event.date_event|date:"d/m/Y - H:i" }}hrs</p>
-      <p class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Endereço: Rua alvenair 556, Centro</p>
+      <p class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Endereço: {{ event.address.road }} - {{event.address.number}}, {{ event.address.district }}, {{event.address.city}} - {{event.address.state}}</p>
       <p class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Ingressos</p>
+      {% if tickets %}
+      {% for ticket in tickets %}
       <p
         class="mb-2 text-lg font-semibold bg-gray-100 text-gray-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-        Meia - R$ 25,00</p>
-      <p
-        class="mb-2 text-lg font-semibold bg-gray-100 text-gray-800 me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-        Interia - R$ 50,00</p>
+        {{ticket.ticket_type}} - {{ticket.price}}</p>
+        {% endfor %}
+        {% endif %}
+
       {% if event.status %}
       <p class="mb-4">
         <span

@@ -5,6 +5,9 @@ from .models import Address
 from .forms import AddressForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib import messages
+from django_htmx.http import HttpResponseClientRedirect
+from django_htmx.http import HttpResponseClientRefresh
 
 
 @method_decorator(login_required(login_url='login_view'), name='dispatch')
@@ -29,7 +32,15 @@ class UpdateAddressView(UpdateView):
 
 class DeleteAddressView(View):
 
-    def get(self, request, pk):
+    def post(self, request, pk):
+        if not self.request.user.id == pk:
+            return HttpResponseClientRefresh()
+
         address = Address.objects.get(pk=pk)
-        address.delete()
-        return redirect('list_address_view')
+        try:
+            address.delete()
+        except Exception:
+            messages.error(self.request, 'Existem Eventos ultilizando este Endereço, Não é possivel apagar.')
+            return HttpResponseClientRefresh()
+
+        return HttpResponseClientRedirect(reverse_lazy('detail_user_view'))

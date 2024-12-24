@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, View, UpdateView
 from django.contrib.auth.models import User
-from .forms import UserForm
+from .forms import UserForm, UpdateUserForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -68,10 +68,8 @@ class LogoutUserView(View):
 @method_decorator(login_required(login_url='login_view'), name='dispatch')
 class UpdateUserView(UpdateView):
     model = User
-    template_name = 'users/detail_user.html'
-    context_object_name = 'user'
-    form_class = UserForm
-    success_url = reverse_lazy('profile_view')
+    template_name = 'users/update_user.html'
+    form_class = UpdateUserForm
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -83,3 +81,10 @@ class UpdateUserView(UpdateView):
         context['adresses'] = Address.objects.filter(user=self.request.user.id)
 
         return context
+    
+    def get_success_url(self):
+        messages.success(
+            self.request,
+            'Informações atualizadas com Sucesso'
+            )
+        return reverse_lazy('update_user_view')

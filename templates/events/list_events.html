@@ -57,8 +57,7 @@
                     <p class="text-sm font-medium text-gray-700 dark:text-gray-400">Por: Lázaro wendel</p>
                     <p class="text-sm font-medium text-gray-700 dark:text-gray-400">
                         Data e Hora: {{ item.event.date_event|date:"d/m/Y - H:i" }}hrs</p>
-                    <p class="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">Endereço: Rua Padre Chico 266,
-                        Centro</p>
+                    <p class="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">Endereço: {{ item.event.address.road }} - {{item.event.address.number}}, {{ item.event.address.district }}, {{item.event.address.city}} - {{item.event.address.state}}</p>
                     {% if item.event.status %}
                     <p class="mb-4">
                         <span
